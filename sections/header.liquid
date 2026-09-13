@@ -20,7 +20,7 @@
 
   {%- if section.settings.sticky_header_type == 'reduce-logo-size' -%}
     .scrolled-past-header .header__heading-logo-wrapper {
-      width: 75%;
+      width: calc(min(var(--header-logo-width, 100%), 44vw) * 0.75);
     }
   {%- endif -%}
 
@@ -74,7 +74,15 @@
 
 {%- style -%}
   .header {
+    --header-logo-width: {{ settings.logo_width }}px;
     padding: {{ section.settings.padding_top | times: 0.5 | round: 0 }}px 3rem {{ section.settings.padding_bottom | times: 0.5 | round: 0 }}px 3rem;
+  }
+
+  @media screen and (max-width: 749px) {
+    .header--top-center {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
   }
 
   .section-header {
