@@ -1,0 +1,105 @@
+{% doc %}
+  @prompt
+    Add custom JavaScript code to make a Shopify-hosted video autoplay and muted when the page loads. The code should target the video element in the video section and ensure it autoplays silently on page load across all modern browsers.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-video-autoplay-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    min-height: 1px;
+  }
+{% endstyle %}
+
+<video-autoplay-{{ ai_gen_id }}
+  class="ai-video-autoplay-{{ ai_gen_id }}"
+  data-video-selector="{{ block.settings.video_selector | escape }}"
+  {{ block.shopify_attributes }}
+>
+</video-autoplay-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    if (!customElements.get('video-autoplay-{{ ai_gen_id }}')) {
+      class VideoAutoplay{{ ai_gen_id }} extends HTMLElement {
+        connectedCallback() {
+          this.applyAutoplay();
+          this.observer = new MutationObserver(() => this.applyAutoplay());
+          this.observer.observe(document.documentElement, { childList: true, subtree: true });
+        }
+
+        disconnectedCallback() {
+          if (this.observer) this.observer.disconnect();
+        }
+
+        applyAutoplay() {
+          var selector = this.dataset.videoSelector;
+          if (!selector) return;
+
+          var videos;
+          try {
+            videos = document.querySelectorAll(selector);
+          } catch (error) {
+            return;
+          }
+
+          videos.forEach(function(video) {
+            if (!(video instanceof HTMLVideoElement)) return;
+
+            video.autoplay = true;
+            video.muted = true;
+            video.defaultMuted = true;
+            video.setAttribute('autoplay', '');
+            video.setAttribute('muted', '');
+            video.setAttribute('playsinline', '');
+            video.setAttribute('webkit-playsinline', '');
+
+            var playPromise = video.play();
+            if (playPromise && typeof playPromise.catch === 'function') {
+              playPromise.catch(function() {});
+            }
+          });
+        }
+      }
+
+      customElements.define('video-autoplay-{{ ai_gen_id }}', VideoAutoplay{{ ai_gen_id }});
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Video autoplay",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Video behavior"
+    },
+    {
+      "type": "text",
+      "id": "video_selector",
+      "label": "Video CSS selector",
+      "default": ".video-section video"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    }
+  ],
+  "presets": [
+    {
+      "name": "Video autoplay"
+    }
+  ],
+  "tag": null,
+  "class": "video-autoplay-block"
+}
+{% endschema %}
