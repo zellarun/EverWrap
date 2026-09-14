@@ -53,8 +53,8 @@
           "settings": {
             "image": "shopify://shop_images/livingroomcozy_24ea13fe-932e-4641-b7bb-c3d41550e056.jpg",
             "image_overlay_opacity": 30,
-            "heading": "Our Mission: Make beautiful gifting easier, more meaningful and less wasteful.",
-            "heading_size": "h0",
+            "heading": "EverWrap Mission: Make beautiful gifting easier, more meaningful and less wasteful.",
+            "heading_size": "h2",
             "subheading": "",
             "button_label": "Shop all",
             "link": "shopify://collections/shop-all",
