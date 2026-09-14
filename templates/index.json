@@ -277,9 +277,9 @@
       "settings": {
         "collection": "bulk",
         "products_to_show": 4,
-        "title": "Customer Favorites",
+        "title": "New to EverWrap?",
         "heading_size": "h2",
-        "description": "",
+        "description": "<p><strong>Start with a Starter Set.</strong></p><p>Everything you need to be ready for birthdays, holidays, last-minute invitations, and everyday gifting.</p>",
         "show_description": false,
         "description_style": "body",
         "columns_desktop": 4,
