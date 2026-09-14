@@ -17,7 +17,7 @@
           "settings": {
             "image": "shopify://shop_images/IMG_5085.jpg",
             "image_overlay_opacity": 40,
-            "heading": "<strong>EASIER </strong>No tape. No scissors. No mess.                     <strong>BEAUTIFUL </strong>Gift presentation that feels special. <strong>REUSABLE </strong>One wrap. Over and over again. No trash.",
+            "heading": "<strong>EASIER </strong>No tape. No scissors. No mess.                     <strong>BEAUTIFUL </strong>Gifts that feels special. <strong>REUSABLE </strong>One wrap. No trash.",
             "heading_size": "h2",
             "subheading": "THE BETTER WAY TO WRAP",
             "button_label": "Shop all",
@@ -77,7 +77,7 @@
         "slide_height": "small",
         "slider_visual": "dots",
         "auto_rotate": true,
-        "change_slides_speed": 3,
+        "change_slides_speed": 5,
         "image_behavior": "none",
         "show_text_below": false,
         "accessibility_info": "Slideshow about EverWrap"
